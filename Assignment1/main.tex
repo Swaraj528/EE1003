@@ -105,7 +105,7 @@ Applying this algorithm to our differential equation,
 \end{align}
 Verifying this algorithm,
 \begin{center} 
-	\includegraphics[width=0.5\columnwidth]{/home/gvt1/sdcard/github/EE1003/Assignment1/figs/badEulersFull.png}  
+	\includegraphics[width=\columnwidth]{/home/gvt1/sdcard/github/EE1003/Assignment1/figs/badEulersFull.png}  
 	\captionof{figure}{Verification of our Finite Differences algorithm}
 \end{center}
 we can see that the simulation graph shows unusual behaviour. To fix this, we will apply the Finite Differences algorithm as follows,
@@ -116,12 +116,12 @@ we can see that the simulation graph shows unusual behaviour. To fix this, we wi
 \end{align*}
 This prevents our code from producing inaccurate results when $\frac{dy}{dx} \to \infty$.
 \begin{center}
-	\includegraphics[width=0.5\columnwidth]{/home/gvt1/sdcard/github/EE1003/Assignment1/figs/goodEulers.png}  
+	\includegraphics[width=\columnwidth]{/home/gvt1/sdcard/github/EE1003/Assignment1/figs/goodEulers.png}  
 	\captionof{figure}{Verification after interchanging $x$ and $y$}
 \end{center}
 However, on oberving at a closer scale, we notice that the simulation strays away too quickly from the true values at crucial regions of the graph. 
 \begin{center} 
-	\includegraphics[width=0.5\columnwidth]{/home/gvt1/sdcard/github/EE1003/Assignment1/figs/badEulers.png}  
+	\includegraphics[width=\columnwidth]{/home/gvt1/sdcard/github/EE1003/Assignment1/figs/badEulers.png}  
 	\captionof{figure}{Zoomed in section of the previous graph}
 \end{center}
 We will have to use an algorithm that converges fast enough to be useful in our case. 
@@ -138,12 +138,12 @@ One of these methods is the Improved Euler's method, which is as follows
 \end{align*}
 Applying the same $x$ to $y$ switch we made to the previous approach and plotting, there result is
 \begin{center} 
-	\includegraphics[width=0.5\columnwidth]{/home/gvt1/sdcard/github/EE1003/Assignment1/figs/all.png}  
+	\includegraphics[width=\columnwidth]{/home/gvt1/sdcard/github/EE1003/Assignment1/figs/all.png}  
 	\captionof{figure}{Verification of Improved Euler's method}
 \end{center}
 And a closer look:
 \begin{center} 
-	\includegraphics[width=0.5\columnwidth]{/home/gvt1/sdcard/github/EE1003/Assignment1/figs/allZoomed.png}  
+	\includegraphics[width=\columnwidth]{/home/gvt1/sdcard/github/EE1003/Assignment1/figs/allZoomed.png}  
 	\captionof{figure}{Zoomed in section of the previous graph}
 \end{center}
 Thus, we have numerically verified that $xy = log\brak{y} + C$ is a solution to the differential equation $\frac{dy}{dx} = \frac{y^2}{1-xy}$.
