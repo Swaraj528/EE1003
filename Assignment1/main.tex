@@ -101,7 +101,7 @@ Applying this algorithm to our differential equation,
 \begin{align}
 	\text{Taking initial point \brak{\text{without loss of generality}} as} \myvec{5, 1}\\
 	x_0\leftarrow 5, y_0\leftarrow 1\\
-	\text{Iterate}\, x_{n+1} = x_n + h, y_{n+1} = y_n + h \cdot \frac{y^2}{1-xy}
+	\text{Iterate}\, x_{n+1} = x_n + h, y_{n+1} = y_n + h \cdot \frac{y_n^2}{1-x_ny_n}
 \end{align}
 Verifying this algorithm,
 \begin{center} 
@@ -126,7 +126,6 @@ However, on oberving at a closer scale, we notice that the simulation strays awa
 \end{center}
 We will have to use an algorithm that converges fast enough to be useful in our case. 
 One of these methods is the Improved Euler's method, which is as follows
-
 \begin{align*}
 	\text{Let initial point be} \myvec{x_i, y_i}&\\
 	\text{Set}\, x_0 \leftarrow x_i, y_0 \leftarrow y_i. \\\text{Let} \myvec{x_1, y_1}, \cdots, \myvec{x_n, y_n} \text{be approximate points on the solution curve.}&\\
@@ -136,7 +135,7 @@ One of these methods is the Improved Euler's method, which is as follows
 	y_{n+1} = y_n + \frac{1}{2} \cdot (k_1 + k_2)& \\
 	x_{n+1} = x_n + h&
 \end{align*}
-Applying the same $x$ to $y$ switch we made to the previous approach and plotting, there result is
+Applying the same $x$ to $y$ switch we made to the previous approach and plotting, the result is
 \begin{center} 
 	\includegraphics[width=\columnwidth]{/home/gvt1/sdcard/github/EE1003/Assignment1/figs/all.png}  
 	\captionof{figure}{Verification of Improved Euler's method}
