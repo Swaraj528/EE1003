@@ -82,7 +82,7 @@ Changing to polar coordinates,
 	dx = - a \sin\theta d\theta\\
 	\text{Plugging into our integral,}\, &\int\limits_{\frac{\pi}{4}}^{0} \sqrt{a^2-a^2 \cos^2\theta} \brak{-a \sin\theta} d\theta\\
 	&= \int\limits_{\frac{\pi}{4}}^{0} \sqrt{a^2 \sin^2\theta} \brak{-a \sin\theta} d\theta\\
-	&= \int\limits_{\frac{\pi}{4}}^{0} a \sin\theta \brak{-a \sin\theta} d\theta\\
+	&= \int\limits_{\frac{\pi}{4}}^{0} a \sin\theta \brak{-a \sin\theta} d\theta
 \end{align}
 \begin{align}
 	&= -\int\limits_{\frac{\pi}{4}}^{0} a^2 \sin^2\theta d\theta\\
@@ -100,11 +100,16 @@ Following from \ref{eq1}
 \end{align}
 We can solve the integral on the R.H.S. using the Trapezoidal Rule as follows.
 \begin{align}
-	\int\limits_{x_n}^{x_{n+1}} y \, dx &= h\sbrak{\frac{\sqrt{a^2-x_{n+1}^2} + \sqrt{a^2-x_n^2}}{2}}
+	A_{n+1}-A_{n} = 	\int\limits_{x_n}^{x_{n+1}} y \, dx &= h\sbrak{\frac{\sqrt{a^2-x_{n+1}^2} + \sqrt{a^2-x_n^2}}{2}}
 \end{align}
-Our area will be calculated as
+Where $n$ is the number of iterations we want to calculate in, $h = \frac{a-\frac{a}{\sqrt{2}}}{n}$, and $A_{n}$ is there area calculated till the $n^{th}$ iteration, and $x_0 = \frac{a}{\sqrt{2}}$.
+The update equation for our area will be:
 \begin{align}
-	\sum\limits_{x_n = \frac{a}{\sqrt{2}}}^{a} h\sbrak{\frac{\sqrt{a^2-x_{n+1}^2} + \sqrt{a^2-x_n^2}}{2}}
+	A_{n+1} = A_{n} +  h\sbrak{\frac{\sqrt{a^2-x_{n+1}^2} + \sqrt{a^2-x_n^2}}{2}}
+\end{align}
+And the total area will be computed to be:
+\begin{align}
+	A_{total} = \sum\limits_{i = 0}^{n-1} h\sbrak{\frac{\sqrt{a^2-x_{i+1}^2} + \sqrt{a^2-x_i^2}}{2}}
 \end{align}
 The smaller our step-size, $h$, is, the more accurate our area calulation will be.\\
 And the required area is twice of the calculated area, as the calculated region reflects about the $x$-axis in the total region.
