@@ -102,7 +102,7 @@ We can solve the integral on the R.H.S. using the Trapezoidal Rule as follows.
 \begin{align}
 	A_{n+1}-A_{n} = 	\int\limits_{x_n}^{x_{n+1}} y \, dx &= h\sbrak{\frac{\sqrt{a^2-x_{n+1}^2} + \sqrt{a^2-x_n^2}}{2}}
 \end{align}
-Where $n$ is the number of iterations we want to calculate in, $h = \frac{a-\frac{a}{\sqrt{2}}}{n}$, and $A_{n}$ is there area calculated till the $n^{th}$ iteration, and $x_0 = \frac{a}{\sqrt{2}}$.
+Where $n$ is the number of iterations we want to calculate in, $h = \frac{a-\frac{a}{\sqrt{2}}}{n}$, $A_{n}$ is the area calculated till the $n^{th}$ iteration, and $x_0 = \frac{a}{\sqrt{2}}$.
 The update equation for our area will be:
 \begin{align}
 	A_{n+1} = A_{n} +  h\sbrak{\frac{\sqrt{a^2-x_{n+1}^2} + \sqrt{a^2-x_n^2}}{2}}
