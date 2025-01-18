@@ -12,19 +12,19 @@ deriv = FUNCPTR(("deriv", lib))
 func = FUNCPTR(("func", lib))
 
 lib.makePlotArray.argtypes = [
-    ctypes.c_double,                # xo
-    ctypes.c_double,                # yo
-    ctypes.c_int,                   # n
-    ctypes.POINTER(ctypes.c_double), # x (array)
-    ctypes.POINTER(ctypes.c_double), # y (array)
+    ctypes.c_double,                
+    ctypes.c_double,                
+    ctypes.c_int,                  
+    ctypes.POINTER(ctypes.c_double),
+    ctypes.POINTER(ctypes.c_double),
     ctypes.c_double
     ]
 lib.gradDesc.argtypes = [
-    ctypes.c_double,                # xo
+    ctypes.c_double,               
     ctypes.c_double,   
-    ctypes.c_double,# yo
-    ctypes.POINTER(ctypes.c_double),# n
-    FUNCPTR,# dybydx (function pointer)
+    ctypes.c_double,
+    ctypes.POINTER(ctypes.c_double),
+    FUNCPTR,
     FUNCPTR
     ]
 n = 1000000
