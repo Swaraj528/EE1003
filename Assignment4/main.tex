@@ -130,7 +130,7 @@ where:
     \item The sign function ensures numerical stability.
 \end{itemize}
 To transform $A$ into an upper triangular matrix $R$:
-\begin{enumerate}
+\begin{itemize}
     \item Construct $H_1$ to zero out all but the first element of the first column.
     \item Apply $H_1$ to $A$ from the left:
     \begin{align}
@@ -139,7 +139,7 @@ To transform $A$ into an upper triangular matrix $R$:
     \item Construct $H_2$ to zero out all but the first element of the second column (ignoring the first row).
     \item Apply $H_2$ to $A^{(1)}$.
     \item Repeat this process until all subdiagonal elements are zero, yielding an upper triangular matrix $R$.
-\end{enumerate}
+\end{itemize}
 
 Since each $H_k$ is orthogonal, their product $Q^T = H_m H_{m-1} \dots H_1$ is also orthogonal, so we define:
 \begin{align}
