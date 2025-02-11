@@ -56,12 +56,56 @@
 \numberwithin{equation}{enumi}
 \numberwithin{figure}{enumi}
 \renewcommand{\thetable}{\theenumi}
-\textbf{Problem:} A box contains $1$ red and $3$ identical white balls. Two balls are drawn at random in succession without replacement. Write the sample space for this experiment.\\
-\sbrak{Additional: Find the probability mass function too.}
-\solution 
+\textbf{Problem:} A box contains $1$ red and $3$ identical white balls. Two balls are drawn at random in succe
+ssion without replacement. Write the sample space for this experiment.\\
+\sbrak{\text{Additional: Find the probability mass function too.}}\\
+\solution
 
 The sample space $\sigma$ is given by:
 \begin{align}
-	\sigma = \cbrak{WW, RW, WR}
+  \sigma = \cbrak{WW, RW, WR}
 \end{align}
+
+We shall define random variable $X$, which denotes the position at which the Red ball is drawn. \\
+Then $X$ takes the values
+\begin{align}
+  X = 
+  \begin{cases}
+    0 ,&\, \text{red ball never drawn}\\
+    1 ,&\, \text{red ball drawn first}\\
+    2 ,&\, \text{red ball drawn second}
+  \end{cases}
+\end{align}
+There is a total of $4\cdot3$ outcomes that can happen, with $4$ in first draw and $3$ in second.
+These outcomes relate with $X$ as:
+\begin{itemize}
+  \item $X=0$ when both balls drawn are white, and there's a total of $3\cdot2$ these outcomes.
+  \item $X=1$ when the first ball is red, the second ball has to white. Giving a total of $1\cdot3$.
+  \item $X=2$ when the second ball is red, the first has to be white. Giving a total of $3\cdot1$
+\end{itemize}
+This translates to the Probability Mass Function as 
+\begin{align}
+  p_X\brak{k} = 
+  \begin{cases}
+    \frac{6}{12} = 0.50,\,& k = 0\\
+    \frac{3}{12} = 0.25,\,& k = 1\\
+    \frac{3}{12} = 0.25,\,& k = 2
+  \end{cases}
+\end{align}
+\textbf{Computing the Probabilities}
+
+We simulate the experiment using random variables and boolean logic.  
+
+\begin{itemize}
+    \item Let $X_1$ be 1 if the first draw is red, otherwise 0.
+    \item Let $X_2$ be 1 if the second draw is red (only if $X_1 = 0$), otherwise 0.
+    \item Define outcomes:
+    \begin{align*}
+        RW: & \quad X_1 = 1, X_2 = 0 \\
+        WR: & \quad X_1 = 0, X_2 = 1 \\
+        WW: & \quad X_1 = 0, X_2 = 0
+    \end{align*}
+\end{itemize}
+We estimate probabilities by running a large number of trials and counting occurrences.
+
 \end{document}
