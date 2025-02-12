@@ -94,18 +94,34 @@ This translates to the Probability Mass Function as
 \end{align}
 \textbf{Computing the Probabilities}
 
-We simulate the experiment using random variables and boolean logic.  
 
+We perform a Monte Carlo simulation to verify these probabilities by running a large number of trials. The algorithm proceeds as follows:
+\begin{enumerate}
+    \item Randomly select the first ball: Red with probability $\frac{1}{4}$, White with probability $\frac{3}{4}$.
+    \item If the first ball is White, randomly select the second ball: Red with probability $\frac{1}{3}$, White with probability $\frac{2}{3}$.
+    \item Count occurrences of each event $(WW, RW, WR)$.
+    \item Compute empirical probabilities as the relative frequencies of these events.
+\end{enumerate}
+This is how the code works:
 \begin{itemize}
-    \item Let $X_1$ be 1 if the first draw is red, otherwise 0.
-    \item Let $X_2$ be 1 if the second draw is red (only if $X_1 = 0$), otherwise 0.
-    \item Define outcomes:
-    \begin{align*}
-        RW: & \quad X_1 = 1, X_2 = 0 \\
-        WR: & \quad X_1 = 0, X_2 = 1 \\
-        WW: & \quad X_1 = 0, X_2 = 0
-    \end{align*}
+    \item We generate $X_1$ by selecting a random number between 0 and 3. We set $X_1 = 1$ if the chosen number is 0, which occurs with probability $0.25$.
+    \item If $X_1 = 1$, we set $X_2 = 0$ since the only red ball has already been drawn.
+    \item Otherwise, we generate $X_2$ by selecting a random number between 0 and 2, setting $X_2 = 1$ if the chosen number is 0, which occurs with probability $0.33$.
 \end{itemize}
-We estimate probabilities by running a large number of trials and counting occurrences.
+
+\textbf{Outcome Definitions:}
+\begin{align*}
+    RW &: \quad X_1 = 1, X_2 = 0 \\
+    WR &: \quad X_1 = 0, X_2 = 1 \\
+    WW &: \quad X_1 = 0, X_2 = 0
+\end{align*}
+
+
+The estimated probabilities from the simulation are:
+\begin{align}
+  P(WW) &\approx 0.50 \\
+  P(RW) &\approx 0.25 \\
+  P(WR) &\approx 0.25
+\end{align}
 
 \end{document}
