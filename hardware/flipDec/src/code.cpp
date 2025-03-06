@@ -29,11 +29,7 @@ void setup() {
 void loop() {
 	disp_7447(W,X,Y,Z);  
 	delay(1000);
-
-	D = digitalRead(6); 
-	C = digitalRead(7);  
-	B = digitalRead(8);  
-	A = digitalRead(9);
+	A=W;B=X;C=Y;D=Z;
 	W = (A&(!B)&(!C)&(!D))|((!A)&B&C&D);
   X = ((!A)&(!B)&C&D)|(B&(!C))|(B&B&(!D));
   Y = ((!A)&(!C)&D)|(C&(!D));
