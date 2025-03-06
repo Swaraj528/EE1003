@@ -1,0 +1,4 @@
+avr-gcc -c lcd.S -o lcd.o
+avr-gcc -mmcu=atmega328p -DF_CPU=16000000UL -Os lcd.o main.c -o main.elf
+avrdude -c usbasp -p m328p -U flash:w:main.elf
+
