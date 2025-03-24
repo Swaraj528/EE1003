@@ -1,0 +1,293 @@
+%DRAFT
+
+
+\documentclass[12pt,a4paper]{article}
+\usepackage{amsmath}
+\usepackage{graphicx}
+\usepackage{listings}
+\usepackage{xcolor}
+\usepackage{float}
+\usepackage{hyperref}
+
+\lstset{
+  language=C++,
+  backgroundcolor=\color{black!5},
+  basicstyle=\small\ttfamily,
+  keywordstyle=\color{blue},
+  commentstyle=\color{green!50!black},
+  stringstyle=\color{red},
+  breaklines=true,
+  showstringspaces=false,
+  numbers=left,
+  numberstyle=\tiny\color{gray},
+  frame=single
+}
+
+\title{Arduino Scientific Calculator:\\ Implementation and Analysis}
+
+\begin{document}
+
+\maketitle
+
+\begin{abstract}
+This report provides a comprehensive explanation of an Arduino-based scientific calculator implementation. The calculator supports advanced mathematical operations through a Shunting Yard algorithm for expression parsing, along with custom mathematical functions. We detail both the electronic circuit design and the software architecture, focusing on the expression evaluation process and user interface implementation.
+\end{abstract}
+
+\tableofcontents
+
+\section{Introduction}
+
+The Arduino scientific calculator project implements a fully functional calculator capable of evaluating complex mathematical expressions with proper operator precedence. Key features include:
+
+\begin{itemize}
+    \item Support for basic arithmetic operations (+, -, *, /)
+    \item Advanced mathematical functions (sin, cos, tan, inverse trigonometric functions)
+    \item Logarithmic functions (ln, log)
+    \item Exponential operations (e\^{}x, power function)
+    \item Parenthetical expressions with proper precedence handling
+    \item Backspace functionality for error correction
+    \item LCD display for input and result visualization
+\end{itemize}
+
+The calculator employs the Shunting Yard algorithm for expression evaluation and custom implementations of mathematical functions using Euler's method, without relying on external libraries.
+
+\section{Hardware Components and Circuit Design}
+
+\subsection{Components List}
+
+\begin{itemize}
+    \item Arduino Uno R3 (ATmega328P microcontroller)
+    \item 16x2 LCD display
+    \item 8 push buttons for input
+    \item Resistors (10k$\Omega$ for pull-up)
+    \item Potentiometer (10k$\Omega$ for LCD contrast)
+    \item Breadboard and connecting wires
+\end{itemize}
+
+\subsection{Circuit Connections}
+
+The circuit follows a standard design with the following connections:
+
+\subsubsection{LCD Display Connection}
+The 16x2 LCD display is connected in 4-bit mode to save pins:
+\begin{itemize}
+    \item RS (Register Select) - Arduino pin 12 (PB4)
+    \item E (Enable) - Arduino pin 11 (PB3)
+    \item D4-D7 - Arduino pins 5-2 (PD5-PD2)
+    \item LCD VSS - GND
+    \item LCD VDD - 5V
+    \item LCD V0 - Connected to potentiometer for contrast adjustment
+\end{itemize}
+
+\subsubsection{Button Connections}
+Eight push buttons are connected to Arduino inputs with pull-up resistors:
+\begin{itemize}
+    \item DIGIT\_BTN - Arduino pin A0 (PC0): Cycles through digits 0-9
+    \item OPEN\_PAREN - Arduino pin A1 (PC1): Adds opening parenthesis
+    \item CLOSE\_PAREN - Arduino pin A2 (PC2): Adds closing parenthesis
+    \item OP\_BTN - Arduino pin A3 (PC3): Cycles through operations
+    \item FUNC\_BTN - Arduino pin A4 (PC4): Cycles through functions
+    \item SET\_BTN - Arduino pin 7 (PD7): Commits selection to expression
+    \item EQUALS\_BTN - Arduino pin 8 (PB0): Evaluates expression
+    \item CLEAR\_BTN - Arduino pin 9 (PB1): Backspace functionality
+\end{itemize}
+
+\section{Software Architecture}
+
+\subsection{Code Organization}
+
+The software is structured into several logical components:
+
+\begin{itemize}
+    \item \textbf{Hardware Initialization}: Setup of LCD, timer, and input buttons
+    \item \textbf{User Input Handling}: Button detection and debouncing
+    \item \textbf{Expression Building}: Construction of mathematical expressions
+    \item \textbf{Expression Evaluation}: Shunting Yard algorithm implementation
+    \item \textbf{Mathematical Functions}: Custom implementations of trigonometric, logarithmic, and exponential functions
+    \item \textbf{Display Management}: LCD update and formatting
+\end{itemize}
+
+\subsection{Key Data Structures}
+
+\begin{itemize}
+    \item \textbf{Expression String}: Stores the mathematical expression being built
+    \item \textbf{Operator Stack}: Used in the Shunting Yard algorithm for operation precedence
+    \item \textbf{Value Stack}: Stores operands and intermediate results during evaluation
+\end{itemize}
+
+\section{Expression Evaluation: The Shunting Yard Algorithm}
+
+The calculator implements Dijkstra's Shunting Yard algorithm to convert infix expressions (normal mathematical notation) to postfix notation (Reverse Polish Notation) for evaluation while respecting operator precedence.
+
+\subsection{Algorithm Overview}
+
+The Shunting Yard algorithm processes an infix expression from left to right, using two stacks:
+\begin{enumerate}
+    \item An operator stack for operators and functions
+    \item A value stack for numbers and calculation results
+\end{enumerate}
+
+\subsection{Operator Precedence}
+
+The calculator defines precedence levels for operations:
+\begin{itemize}
+    \item Level 1: Addition (+) and subtraction (-)
+    \item Level 2: Multiplication (*) and division (/)
+    \item Level 3: Power (\^)
+    \item Level 4: Functions (sin, cos, tan, ln, etc.)
+\end{itemize}
+
+\subsection{Implementation}
+
+The algorithm implementation handles:
+\begin{itemize}
+    \item Tokenization of the input expression
+    \item Operator precedence and associativity
+    \item Function application
+    \item Parenthetical expressions
+    \item Error handling (division by zero, etc.)
+\end{itemize}
+
+\begin{lstlisting}
+// Evaluate expression with proper operator precedence
+float evaluate_expression(void) {
+    // Copy expression so we can modify it
+    char expr_copy[MAX_EXPR_LEN];
+    strcpy(expr_copy, expression);
+    
+    // Stacks for Shunting Yard algorithm
+    float value_stack[MAX_EXPR_LEN];
+    int value_stack_top = 0;
+    
+    char operator_stack[MAX_EXPR_LEN];
+    int operator_stack_top = 0;
+    
+    // Parse the expression
+    int i = 0;
+    while (i < strlen(expr_copy)) {
+        // Algorithm implementation...
+    }
+    
+    // Process remaining operators
+    while (operator_stack_top > 0) {
+        // Apply remaining operators...
+    }
+    
+    // Final result on top of value stack
+    return (value_stack_top > 0) ? value_stack[0] : 0.0f;
+}
+\end{lstlisting}
+
+\section{Mathematical Functions Implementation}
+
+The calculator implements various mathematical functions without using external libraries, primarily using Euler's method for differential equations.
+
+\subsection{Trigonometric Functions}
+
+Sine and cosine are implemented using Euler's method to solve the system of differential equations:
+
+\begin{align}
+\frac{d\sin(x)}{dx} &= \cos(x)\\
+\frac{d\cos(x)}{dx} &= -\sin(x)
+\end{align}
+
+Starting with initial conditions $\sin(0) = 0$ and $\cos(0) = 1$, the functions are numerically integrated.
+
+\begin{lstlisting}
+float compute_sin_cos(float x, float* sin_val, float* cos_val) {
+    float s = 0.0f;  // sin(0)
+    float c = 1.0f;  // cos(0)
+    float h = 0.0001f; // step size
+    
+    // Normalize x to [0, 2\pi)
+    while(x >= 2*PI) x -= 2*PI;
+    while(x < 0) x += 2*PI;
+    
+    for (float t = 0.0f; t < x; t += h) {
+        float s_new = s + h * c;
+        float c_new = c - h * s;
+        s = s_new;
+        c = c_new;
+    }
+    
+    *sin_val = s;
+    *cos_val = c;
+    return s;
+}
+\end{lstlisting}
+
+\subsection{Exponential Function}
+
+The exponential function $e^x$ is implemented by solving the differential equation:
+
+\begin{align}
+\frac{dy}{dx} = y
+\end{align}
+
+With initial condition $y(0) = 1$, using Euler's method.
+
+\subsection{Logarithmic Functions}
+
+Natural logarithm is implemented using numerical integration:
+
+\begin{align}
+\ln(x) = \int_{1}^{x} \frac{1}{t} dt
+\end{align}
+
+\subsection{Inverse Trigonometric Functions}
+
+Inverse trigonometric functions (asin, acos, atan) are implemented using Newton's method to numerically solve equations like $\sin(y) = x$ for $y$.
+
+\section{User Interface and Interaction Flow}
+
+\subsection{Input Method}
+
+The calculator uses a cycling input method due to the limited number of buttons:
+\begin{itemize}
+    \item Digit button cycles through digits 0-9
+    \item Operation button cycles through +, -, *, /
+    \item Function button cycles through available functions
+    \item SET button commits current selection to the expression
+\end{itemize}
+
+\subsection{Display Feedback}
+
+The 16x2 LCD display shows:
+\begin{itemize}
+    \item First line: Current expression being built
+    \item Second line: Current selection (digit, operation, or function)
+    \item Parenthesis depth counter to help with expression building
+\end{itemize}
+
+\subsection{Expression Building Process}
+
+\begin{enumerate}
+    \item User cycles to desired digit/operation/function
+    \item SET button commits selection to expression
+    \item Repeat until complete expression is built
+    \item EQUALS button evaluates expression and displays result
+    \item CLEAR button acts as backspace for corrections
+\end{enumerate}
+
+\section{Conclusion}
+
+The Arduino scientific calculator demonstrates the implementation of complex mathematical algorithms on limited hardware. The use of the Shunting Yard algorithm enables proper handling of operator precedence, while custom implementations of mathematical functions allow for advanced calculations without external libraries.
+
+Key achievements of this project include:
+\begin{itemize}
+    \item Efficient expression parsing and evaluation
+    \item Implementation of scientific functions using numerical methods
+    \item Intuitive user interface despite limited input capability
+    \item Proper handling of complex expressions with parentheses
+\end{itemize}
+
+Future improvements could include:
+\begin{itemize}
+    \item Addition of more mathematical functions
+    \item Memory functionality for storing results
+    \item Improved display with scrolling for longer expressions
+    \item Enhanced precision for floating-point calculations
+\end{itemize}
+
+\end{document}
+
